@@ -1,0 +1,45 @@
+apply plugin: 'war'
+apply plugin: 'java'
+apply plugin: 'maven'
+
+project.ext {
+	learnVersion = "9.1.201410.160373"
+  deployServer = "localhost:9876"
+  deployInstance = "BBLEARN"
+}
+
+repositories {
+  mavenCentral()
+  maven {
+    url "https://maven.blackboard.com/content/repositories/releases/"
+  }
+}
+
+configurations {
+	buildUtils
+}
+
+dependencies {
+	buildUtils "org.oscelot:b2deploy-task:0.1.0"
+
+	//Java
+	providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
+	providedCompile 'javax.servlet.jsp:jsp-api:2.1'
+	
+	//Blackboard
+	providedCompile( "blackboard.platform:bb-platform:${learnVersion}" ) { transitive = false }
+	providedCompile( "blackboard.platform:bb-taglibs:${learnVersion}" ) { transitive = false }
+	providedCompile( "blackboard.platform:bb-cms-admin:${learnVersion}" ) { transitive = false }
+
+	//Spring
+	compile "org.springframework:spring-context:4.2.2.RELEASE",
+					"org.springframework:spring-core:4.2.2.RELEASE",
+					"org.springframework:spring-webmvc:4.2.2.RELEASE"
+	//Json
+	compile 'org.json:json:20140107'
+}
+
+task deployB2( dependsOn: "war" ) << {
+      ant.taskdef( name: "b2deploy", classname: "org.oscelot.ant.B2DeployTask", classpath: project.configurations.buildUtils.asPath )
+      ant.b2deploy( localfilepath: project.war.archivePath, host: project.ext.deployServer, courseorgavailable: 'true', clean: 'true', webappName: 'heanet-media-' + project.ext.deployInstance )
+}

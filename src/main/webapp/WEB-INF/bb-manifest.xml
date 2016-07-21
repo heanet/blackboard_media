@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.blackboard.com/bb-manifest-plugin"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.blackboard.com/bb-manifest-plugin https://bbprepo.blackboard.com/content/repositories/releases/blackboard/platform/bb-manifest-plugin/9.1.201410.160373/bb-manifest-plugin-9.1.201410.160373.xsd">
+
+	<plugin>
+
+		<name value="HEAnet Media" />
+		<handle value="heanet-media" />
+		<description value="HEAnet Media plugin for Blackboard" />
+
+		<version value="0.1.1" />
+		<requires>
+			<bbversion value="9.1" />
+		</requires>
+
+		<vendor>
+			<id value="hnet" />
+			<name value="HEAnet Ltd." />
+			<url value="http://www.heanet.ie" />
+			<description value="HEAnet is Ireland's National Education and Research Network" />
+		</vendor>
+
+		<!--<content-handlers>
+			<content-handler>
+				<name value="HEAnet Media List"/>
+				<handle value="resource/x-bb-heanetmedia-video"/>
+				<http-actions>
+					<create value="/controller/list"/>
+				</http-actions>
+				<icons>
+					<toolbar value="/assets/images/icon.png"/>
+			   		<listitem value="/assets/images/icon.png"/>
+				</icons>
+				<types>
+					<type>
+						<action-type value="mashup" />
+					</type>
+					<type>
+						<action-type value="video" />
+					</type>
+				</types>
+			</content-handler>
+		</content-handlers>-->
+
+		<application-defs>
+			<application handle="heanet-media-vtbe" is-course-tool="true" is-org-tool="true" is-sys-tool="true" name="HEAnet Media Plugin Mashup">
+				<description>HEAnet Media Plugin</description>
+				<links>
+					<link>
+						<type value="vtbe_mashup_sys" />
+						<name value="HEAnet media Upload" />
+						<url value="controller/upload" />
+						<description value="HEAnet Media Plugin - Upload file" />
+					</link>
+					<link>
+						<type value="vtbe_mashup_course" />
+						<name value="HEAnet media Upload" />
+						<url value="controller/upload" />
+						<description value="HEAnet Media Plugin - Upload file" />
+					</link>
+					<link>
+						<type value="vtbe_mashup_sys" />
+						<name value="HEAnet media List" />
+						<url value="controller/list" />
+						<description value="HEAnet Media Plugin - See your videos" />
+					</link>
+					<link>
+						<type value="vtbe_mashup_course" />
+						<name value="HEAnet media List" />
+						<url value="controller/list" />
+						<description value="HEAnet Media Plugin - See your videos" />
+					</link>
+				</links>
+			</application>
+		</application-defs>
+
+		<permissions>
+			<permission type="java.io.FilePermission" name="lt;lt;ALL FILESgt;gt;" actions="read,write"/>
+
+			//User read permission
+			<permission type="attribute" name="user.authinfo" actions="get,set" />
+			<permission type="attribute" name="user.personalinfo" actions="get,set" />
+
+			//Socket permission to connect to media
+			<permission type="java.net.SocketPermission" name="*" actions="connect,resolve" />
+
+			//Spring permissions
+			<permission type="java.lang.reflect.ReflectPermission" name="suppressAccessChecks" />
+			<permission type="java.lang.RuntimePermission" name="accessDeclaredMembers" />
+			<permission type="java.lang.RuntimePermission" name="createClassLoader" />
+			<permission type="java.lang.RuntimePermission" name="setContextClassLoader" />
+			<permission type="java.lang.RuntimePermission" name="getProtectionDomain" />
+
+			//Content permissions
+			<permission type="persist" name="Content" actions="*" />
+			<permission type="persist" name="contentfile" actions="*" />
+			<permission type="persist" name="metadatacontentareaassociation" actions="create" />
+		</permissions>
+
+	</plugin>
+</manifest>
