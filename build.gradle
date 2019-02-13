@@ -4,7 +4,7 @@ apply plugin: 'maven'
 
 project.ext {
 	learnVersion = "9.1.201410.160373"
-  deployServer = "localhost:9876"
+  deployServer = "http://localhost:9876"
   deployInstance = "BBLEARN"
 }
 

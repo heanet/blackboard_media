@@ -9,7 +9,7 @@
 		<handle value="heanet-media" />
 		<description value="HEAnet Media plugin for Blackboard" />
 
-		<version value="0.1.1" />
+		<version value="0.1.2" />
 		<requires>
 			<bbversion value="9.1" />
 		</requires>
@@ -78,21 +78,21 @@
 		<permissions>
 			<permission type="java.io.FilePermission" name="lt;lt;ALL FILESgt;gt;" actions="read,write"/>
 
-			//User read permission
+			<!-- User read permission -->
 			<permission type="attribute" name="user.authinfo" actions="get,set" />
 			<permission type="attribute" name="user.personalinfo" actions="get,set" />
 
-			//Socket permission to connect to media
+			<!-- Socket permission to connect to media -->
 			<permission type="java.net.SocketPermission" name="*" actions="connect,resolve" />
 
-			//Spring permissions
+			<!-- Spring permissions -->
 			<permission type="java.lang.reflect.ReflectPermission" name="suppressAccessChecks" />
 			<permission type="java.lang.RuntimePermission" name="accessDeclaredMembers" />
 			<permission type="java.lang.RuntimePermission" name="createClassLoader" />
 			<permission type="java.lang.RuntimePermission" name="setContextClassLoader" />
 			<permission type="java.lang.RuntimePermission" name="getProtectionDomain" />
 
-			//Content permissions
+			<!-- Content permissions -->
 			<permission type="persist" name="Content" actions="*" />
 			<permission type="persist" name="contentfile" actions="*" />
 			<permission type="persist" name="metadatacontentareaassociation" actions="create" />

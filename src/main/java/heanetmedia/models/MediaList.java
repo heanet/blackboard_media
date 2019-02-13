@@ -69,11 +69,32 @@ public class MediaList extends ArrayList<Media> {
         String guid = hashUserId();
         String response = curl(MediaList.listUrl+"UserGUID="+guid);
 
-        //Splitting response
-        StringTokenizer st = new StringTokenizer(response,"[]");
+        // Response is empty
+        if(response.length() < 1) return false;
 
-        //Check login then adds data to the list if successful
-        if (st.hasMoreTokens() && checkLogin(st.nextToken())) {
+        JSONObject j = new JSONObject(response);
+        String status = j.get("Status").toString();
+
+        // Check login and check whether files exist
+        switch(status) {
+            case "Found":
+                // If we find files, continue to parsing them
+                break;
+            case "No Files":
+                // If there are no files, display an empty page with error
+                return true;
+            default:
+                // Otherwise 
+                return false;
+        }
+
+        String dataString = j.get("Data").toString();
+
+        //Splitting response
+        StringTokenizer st = new StringTokenizer(dataString,"[]");
+
+        // Add data to list
+        if (st.hasMoreTokens()) {
             StringTokenizer data = new StringTokenizer(st.nextToken(),"{}");
             String s = null;
 
@@ -84,9 +105,6 @@ public class MediaList extends ArrayList<Media> {
                     add(new Media(new JSONObject("{"+s+"}")));
                 }
             }
-        }
-        else {
-            return false;
         }
 
         return true;

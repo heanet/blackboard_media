@@ -117,3 +117,11 @@ body {
 ::-webkit-scrollbar {
     display: none;
 }
+
+.list-error {
+    margin-top: 60px;
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+    color: red;
+}

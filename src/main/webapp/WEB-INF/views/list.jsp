@@ -13,6 +13,9 @@
 			<h2>Choose your video</h2>
 		</div>
 		<div id="list">
+		<c:if test="${medias.size() == 0}">
+			<div class="list-error">No files found</div>
+		</c:if>
 			<ul>
 			<c:forEach items="${medias}" var="media" varStatus="loopStatus">
 				<li id="${media.getId()}" class="video unchecked" onclick="setVideo('${media.getId()}','${media.getSource()}')">
@@ -22,9 +25,11 @@
 			</c:forEach>
 			</ul>
 		</div>
+	<c:if test="${medias.size() > 0}">
 		<form id="form" action="${targetUrl}" onsubmit="return getEmbedTag()">
 			<input type="hidden" name="embedHtml" id="embedHtml" value="" />
 			<input type="submit" value="Add Video">
 		</form>
+	</c:if>
 	</body>
 </html>
