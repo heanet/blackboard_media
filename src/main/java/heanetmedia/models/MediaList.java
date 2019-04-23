@@ -150,6 +150,8 @@ public class MediaList extends ArrayList<Media> {
             e.printStackTrace();
         }
 
+        uid = padLeadingZeros(uid, 32);
+
         return uid;
     }
 
@@ -186,5 +188,9 @@ public class MediaList extends ArrayList<Media> {
         }
 
         return curl;
+    }
+
+    private String padLeadingZeros(String inputString, int desiredLength) {
+        return String.format("%" + desiredLength + "s", inputString).replace(' ', '0');
     }
 }

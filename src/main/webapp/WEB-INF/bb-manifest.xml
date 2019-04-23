@@ -9,7 +9,7 @@
 		<handle value="heanet-media" />
 		<description value="HEAnet Media plugin for Blackboard" />
 
-		<version value="0.1.2" />
+		<version value="0.1.3" />
 		<requires>
 			<bbversion value="9.1" />
 		</requires>
